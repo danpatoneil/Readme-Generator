@@ -13,7 +13,9 @@ const questions = [
     'Describe how the project should be used',
     'Describe how others can contribute to this product to improve it for future users',
     'How can users run tests on this project',
-    'Which license would you like to publish this project under'
+    'Which license would you like to publish this project under',
+    'If you would like to, please enter your Github username',
+    'If you would like to, please enter your email address so interested users can contact you'
 ];
 
 // TODO: Create a function to write README file
@@ -60,14 +62,25 @@ function init() {
                 message: questions[6],
                 name: 'license',
                 choices: ['MIT', 'Mozilla', 'CC BY-ND']
+            },
+            {
+                type: 'input',
+                name: 'github',
+                message: questions[7]
+
+            },
+            {
+                type: 'input',
+                name: 'email',
+                message: questions[8]
+
             }
         ])
         .then((data) => {
             const fileData = generateMarkdown(data);
-            const fileName = `${data.title.trim().replaceAll(' ',  '-')}.md`
-            console.log(fileData);
+            const fileName = `README.md`
             fs.writeFile(fileName, fileData, (err) => {
-                err ? console.log(err) : console.log(`${fileData} created`)
+                err ? console.log(err) : console.log(`${fileName} created`)
             });
         });
 }
